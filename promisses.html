@@ -1,0 +1,42 @@
+<script>
+ // Promise ha 3 stage.  Pending , Resolve, Reject   
+// 1) Executor
+// 2) Promise produce/ Promise consume.
+// You must execute a function which is called Executer function
+const probj = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        let roll_No = [1,2,3,4,5,6];
+        resolve(roll_No);
+        //reject('Error while Commicating');
+     } ,2000);
+});
+
+const getBioData = (indexData) => {
+    return new Promise((resolve, reject) => {
+        setTimeout((indexData) => {
+            let Biodata = {
+                name : 'sajid',
+                Age : 25
+            }
+            resolve(`My rollno is ${indexData} and my age is ${Biodata.Age}`);
+        },2000 , indexData);
+    });
+
+};
+
+//* The  method  Promise.then(), Promise.catch() and Promise.finally() are used to associte further actionwitha promise that beceome setteled. 
+//..Promise consume
+probj.then((rollno) => {
+    console.log(rollno);
+        getBioData(rollno[1]).then((Welldone)=>{
+        console.log(Welldone);
+        })
+
+})
+
+// when promise reject we use .catch
+.catch((error)=>{
+ console.log(error);
+});
+
+</script>
